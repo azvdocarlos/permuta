@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Gerar Permuta PM</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f4f4f9; }
         .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -11,9 +13,10 @@
         h3 { margin-top: 0; color: #004a99; font-size: 1.1rem; }
         label { display: block; margin-top: 10px; font-weight: bold; font-size: 0.9rem; }
         select, input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        input[readonly] { background-color: #f9f9f9; color: #555; cursor: not-allowed; }
-        button { width: 100%; padding: 12px; margin-top: 20px; background-color: #004a99; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        input[readonly] { background-color: #f9f9f9; color: #555; cursor: pointer; }
+        button { width: 100%; padding: 12px; margin-top: 20px; background-color: #004a99; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
         button:hover { background-color: #003366; }
+        .info-data { font-size: 0.8rem; color: #666; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -23,7 +26,7 @@
 
     <form action="/gerar" method="post">
 
-        <div class="section">
+       <div class="section">
             <h3>Dados do Requerente</h3>
             <label>POSTO</label>
             <select name="posto_req">
@@ -69,25 +72,41 @@
         </div>
 
         <div class="section">
-            <label>DATA DA ESCALA</label>
-            <input type="date" name="data" required>
+            <label>SELECIONE A(S) DATA(S)</label>
+            <input type="text" name="data" id="calendario" placeholder="Clique para selecionar" required>
+            <div class="info-data">Selecione um ou dois dias no calendário.</div>
         </div>
 
         <button type="submit">Gerar Documento (PDF)</button>
-
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+
 <script>
+    // Função de Matrícula
     function vincularMatricula(alvo) {
         const select = document.getElementById('nome_' + alvo);
         const input = document.getElementById('num_' + alvo);
-        const selecionado = select.options[select.selectedIndex];
-        
-        // Puxa o número da sequência definida no data-num
-        const matricula = selecionado.getAttribute('data-num');
+        const matricula = select.options[select.selectedIndex].getAttribute('data-num');
         input.value = matricula ? matricula : "";
     }
+
+    // Configuração do Calendário Multi-Seleção
+    flatpickr("#calendario", {
+        mode: "multiple",
+        maxDate: "31.12.2027",
+        dateFormat: "d/m/Y",
+        locale: "pt",
+        conjunction: " e ", // Une as datas com " e "
+        onChange: function(selectedDates, dateStr, instance) {
+            // Se houver mais de 2 datas, remove a mais antiga (limita a 2)
+            if (selectedDates.length > 2) {
+                instance.setDate([selectedDates[selectedDates.length - 2], selectedDates[selectedDates.length - 1]]);
+            }
+        }
+    });
 </script>
 
 </body>
