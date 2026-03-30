@@ -30,6 +30,3 @@ def gerar():
     response.headers['Content-Disposition'] = f'attachment; filename={nome_pdf}'
 
     return response
-
-if __name__ == "__main__":
-    app.run()
