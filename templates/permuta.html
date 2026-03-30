@@ -1,101 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<style>
-body {
-    font-family: Arial;
-    margin: 40px;
-    font-size: 12px;
-}
-
-.topo {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-.titulo {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.texto {
-    text-align: justify;
-    margin-top: 20px;
-    line-height: 1.5;
-}
-
-.assinaturas {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 80px;
-}
-
-.linha {
-    border-bottom: 1px solid black;
-    width: 250px;
-    text-align: center;
-    margin-top: 50px;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Requerimento de Permuta PMCE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #000;
+        }
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .header-table td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .request-content {
+            margin-top: 30px;
+            text-align: justify;
+        }
+        .input-line {
+            border-bottom: 1px solid black;
+            display: inline-block;
+            min-width: 200px;
+        }
+        .motivo-box {
+            border: 1px solid black;
+            padding: 15px;
+            margin: 20px 0;
+            min-height: 80px;
+        }
+        .transgressao {
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            display: block;
+            margin: 10px 0;
+        }
+        .criterios {
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        .criterios h3 {
+            font-size: 14px;
+            text-decoration: underline;
+        }
+        .signature-section {
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .sig-box {
+            width: 45%;
+            text-align: center;
+            border-top: 1px solid black;
+            padding-top: 5px;
+            font-size: 12px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="topo">
-    <div>VISTO: ____/____/2026</div>
-    <div>VISTO: ____/____/2026</div>
-</div>
+    <table class="header-table">
+        <tr>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>Cmt do 31º BPM</td>
+            <td style="width: 50%;">ESTADO DO CEARÁ<br>SSPDS/ PMCE / CPI – Sul<br>31º BPM / 8 °CRPM<br>Jaguaribe/Ceará</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>P1 da Cia</td>
+        </tr>
+    </table>
 
-<div class="titulo">
-ESTADO DO CEARÁ SSPDS/ PMCE / CPI – Sul<br>
-31º BPM / 8° CRPM<br>
-Jaguaribe - Ceará
-</div>
+    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+        (Solicitação de substituição de PM em serviço)
+    </div>
 
-<div class="texto">
-<p><b>(Solicitação de substituição de PM em serviço)</b></p>
+    <div class="request-content">
+        Eu, <strong>{{posto_req}} PM {{nome_req}} Nº {{num_req}}</strong>, venho a V.Sª., requerer que o 
+        <strong>{{posto_sub}} PM {{nome_sub}} Nº {{num_sub}}</strong>, desta OPM, assuma o serviço, em substituição a mim, 
+        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes (requerente e substituído) 
+        estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
+    </div>
 
-<p>
-Eu, <b>{{posto_req}} PM {{nome_req}}</b> Nº {{num_req}}, venho a V.Sª., requerer que o 
-<b>{{posto_sub}} PM {{nome_sub}}</b> Nº {{num_sub}}, desta OPM, assuma o serviço, 
-em substituição a mim, no dia <b>{{data}}</b>, haja vista que as partes estão em comum acordo.
-</p>
+    <div class="motivo-box">
+        </div>
 
-<p>Motivo:</p>
+    <div class="transgressao">
+        ''permutar serviço sem permissão da autoridade competente''<br>
+        (Transgressão MÉDIA, art. 13, §2º, inciso XXVII, Lei nº 13.407/2003);
+    </div>
 
-<p>_______________________________________________________________</p>
+    <div class="criterios">
+        <h3>Critérios</h3>
+        <p><strong>1:</strong> Somente poderá o policial militar pertencente a esta CIA independente de Jaguaribe-CE permutar, no máximo, por motivo devidamente justificado, 06 (seis) serviços de 12h e 03 (três) serviços de 24h por mês na sede, limitando 04 (quatro) para os Destacamentos.</p>
+        
+        <p><strong>2:</strong> Em hipótese alguma será permitida modalidade de escala de serviço diferente da que fora outrora determinada pelo Comando Geral desta corporação, conforme BCG nº 015 de 22/01/2020, quais sejam: 12 x 24, 12x48 para a Sede e 48 x 96 para os Destacamentos.</p>
+        
+        <p><strong>3:</strong> Os requerimentos de permutas devem ser remetidos até 48h do dia anterior ao serviço objeto de permuta pessoalmente ou por telefone ao um dos oficiais da cia, para prévia análise.</p>
+        
+        <p>Aos serviços de finais de semana, tal remessa deve ocorrer até as 16h00 da quinta feira, e nos feriados até as 48h dia útil anterior.</p>
+        
+        <p><strong>-</strong> Qualquer modalidade de serviço que não atente aos critérios: 1 e 2, será considerada sem autorização e, portanto, sujeita às medidas legais cabíveis.</p>
+        
+        <p><strong>-</strong> Estes critérios para permuta da CIA, entrarão em vigor em 22/09/2023.</p>
+    </div>
 
-<p>
-"permutar serviço sem permissão da autoridade competente"
-</p>
-
-<p>
-(Transgressão MÉDIA, art. 13, §2º, inciso XXVII, Lei nº 13.407/2003)
-</p>
-
-<p><b>Critérios</b></p>
-
-<p>
-1: Somente poderá o policial militar pertencente a esta CIA permutar...
-</p>
-
-<p>
-2: Em hipótese alguma será permitida modalidade diferente...
-</p>
-
-<p>
-3: Os requerimentos devem ser enviados até 48h antes...
-</p>
-
-</div>
-
-<div class="assinaturas">
-    <div class="linha">Assinatura do Requerente</div>
-    <div class="linha">Assinatura do Substituto</div>
-</div>
+    <div class="signature-section">
+        <div class="sig-box">
+            Assinatura do PM Requerente
+        </div>
+        <div class="sig-box">
+            Assinatura do PM Substituto
+        </div>
+    </div>
 
 </body>
 </html>
