@@ -3,36 +3,34 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from weasyprint import HTML
 import os
 from functools import wraps
-from datetime import datetime, timedelta
+import time  # para timestamp
 
 app = Flask(__name__)
 app.secret_key = "uma_chave_secreta_aleatoria_1234"
 
-# Usuários cadastrados manualmente
 usuarios = {
     "carlos": generate_password_hash("1234"),
     "joana": generate_password_hash("abcd")
 }
 
-# Decorator para rotas protegidas
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "usuario" not in session:
             return redirect(url_for("login"))
 
-        # Logout automático após 120s de inatividade
-        if "expira_em" in session and datetime.utcnow() > session["expira_em"]:
-            session.pop("usuario", None)
-            session.pop("expira_em", None)
-            return redirect(url_for("login"))
+        # Logout automático
+        if "expira_em" in session:
+            if time.time() > session["expira_em"]:
+                session.pop("usuario", None)
+                session.pop("expira_em", None)
+                return redirect(url_for("login"))
 
-        # Renova o timer a cada requisição
-        session["expira_em"] = datetime.utcnow() + timedelta(seconds=120)
+        # Renova o tempo da sessão
+        session["expira_em"] = time.time() + 120  # 120 segundos
         return f(*args, **kwargs)
     return decorated_function
 
-# ===== LOGIN =====
 @app.route("/login", methods=["GET", "POST"])
 def login():
     erro = None
@@ -41,7 +39,7 @@ def login():
         senha = request.form["senha"]
         if usuario in usuarios and check_password_hash(usuarios[usuario], senha):
             session["usuario"] = usuario
-            session["expira_em"] = datetime.utcnow() + timedelta(seconds=120)
+            session["expira_em"] = time.time() + 120
             return redirect(url_for("index"))
         else:
             erro = "Login ou senha incorretos"
@@ -53,7 +51,6 @@ def logout():
     session.pop("expira_em", None)
     return redirect(url_for("login"))
 
-# ===== APP ORIGINAL =====
 @app.route('/')
 @login_required
 def index():
