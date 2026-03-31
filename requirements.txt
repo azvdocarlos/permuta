@@ -1,3 +1,4 @@
 flask
 weasyprint
 gunicorn
+fpdf2
