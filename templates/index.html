@@ -123,6 +123,33 @@
         }
     });
 </script>
+       <script>
+        function vincularDados(alvo) {
+            const select = document.getElementById('nome_' + alvo);
+            const selectedOption = select.options[select.selectedIndex];
+            
+            if (!selectedOption || selectedOption.value === "") {
+                document.getElementById('num_' + alvo).value = "";
+                document.getElementById('assinatura_' + alvo + '_file').value = "";
+                return;
+            }
+
+            // Preenche o numeral do substituto
+            const inputNum = document.getElementById('num_' + alvo);
+            if (inputNum) {
+                inputNum.value = selectedOption.getAttribute('data-num') || "";
+            }
+            
+            // Preenche a assinatura oculta do substituto
+            const inputAssinatura = document.getElementById('assinatura_' + alvo + '_file');
+            if (inputAssinatura) {
+                inputAssinatura.value = selectedOption.getAttribute('data-assinatura') || "";
+            }
+        }
+    </script>
+</body>
+</html>
+ 
 
 </body>
 </html>
