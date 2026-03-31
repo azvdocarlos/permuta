@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, make_response
 from weasyprint import HTML
+import os
 
 app = Flask(__name__)
 
@@ -9,6 +10,9 @@ def index():
 
 @app.route('/gerar', methods=['POST'])
 def gerar():
+    assinatura_req_file = request.form['assinatura_req']
+    assinatura_sub_file = request.form['assinatura_sub']
+
     html = render_template(
         'permuta.html',
         posto_req=request.form['posto_req'],
@@ -17,13 +21,12 @@ def gerar():
         posto_sub=request.form['posto_sub'],
         nome_sub=request.form['nome_sub'],
         num_sub=request.form['num_sub'],
-        data=request.form['data']
+        data=request.form['data'],
+        assinatura_req_file=assinatura_req_file,
+        assinatura_sub_file=assinatura_sub_file
     )
 
-    import os
-from weasyprint import HTML
-
-pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
+    pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
 
     data_formatada = request.form['data'].replace("/", "").replace("-", "")
     nome_pdf = f"permuta{data_formatada}.pdf"
@@ -33,10 +36,6 @@ pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
     response.headers['Content-Disposition'] = f'attachment; filename={nome_pdf}'
 
     return response
-
-import os
-
-import os
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
