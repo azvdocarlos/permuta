@@ -79,6 +79,47 @@ def gerar():
 
     return response
 
+from datetime import datetime, timedelta
+
+# Decorator para proteger rotas e checar expiração
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "usuario" not in session:
+            return redirect(url_for("login"))
+
+        # Checa expiração da sessão
+        if "expira_em" in session:
+            if datetime.utcnow() > session["expira_em"]:
+                session.pop("usuario", None)
+                session.pop("expira_em", None)
+                return redirect(url_for("login"))
+
+        # Renova o tempo de expiração a cada requisição
+        session["expira_em"] = datetime.utcnow() + timedelta(seconds=120)
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    erro = None
+    if request.method == "POST":
+        usuario = request.form["usuario"]
+        senha = request.form["senha"]
+        if usuario in usuarios and check_password_hash(usuarios[usuario], senha):
+            session["usuario"] = usuario
+            session["expira_em"] = datetime.utcnow() + timedelta(seconds=120)  # define 120s
+            return redirect(url_for("index"))
+        else:
+            erro = "Login ou senha incorretos"
+    return render_template("login.html", erro=erro)
+
+@app.route("/logout")
+def logout():
+    session.pop("usuario", None)
+    session.pop("expira_em", None)
+    return redirect(url_for("login"))
+
 # ===== Execução =====
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
