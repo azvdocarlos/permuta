@@ -3,111 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gerar Permuta PM</title>
+    <title>Gerar Permuta PM com Assinatura</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     
     <style>
-        /* Ajustes base para Mobile First */
-        body { 
-            font-family: 'Segoe UI', Helvetica, Arial, sans-serif; 
-            padding: 10px; 
-            background-color: #f4f4f9; 
-            margin: 0;
-        }
-        
-        .container { 
-            max-width: 100%; 
-            margin: auto; 
-            background: white; 
-            padding: 15px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-        }
-
-        h2 { 
-            text-align: center; 
-            color: #333; 
-            border-bottom: 2px solid #004a99; 
-            padding-bottom: 10px;
-            font-size: 1.5rem;
-            margin-top: 10px;
-        }
-
-        .section { 
-            margin-bottom: 20px; 
-            padding: 12px; 
-            border: 1px solid #e0e0e0; 
-            border-radius: 8px; 
-            background-color: #fff;
-        }
-
-        h3 { 
-            margin-top: 0; 
-            color: #004a99; 
-            font-size: 1.1rem; 
-            border-left: 4px solid #004a99;
-            padding-left: 8px;
-        }
-
-        label { 
-            display: block; 
-            margin-top: 15px; 
-            font-weight: bold; 
-            font-size: 0.85rem; 
-            color: #555;
-            text-transform: uppercase;
-        }
-
-        /* Inputs Maiores para facilitar o toque */
-        select, input { 
-            width: 100%; 
-            height: 48px; /* Altura ideal para dedos */
-            padding: 10px; 
-            margin-top: 5px; 
-            border: 1px solid #bbb; 
-            border-radius: 6px; 
-            box-sizing: border-box; 
-            font-size: 16px; /* Evita zoom automático no iOS */
-        }
-
-        input[readonly] { 
-            background-color: #eee; 
-            color: #333; 
-            font-weight: bold;
-        }
-
-        button { 
-            width: 100%; 
-            padding: 16px; 
-            margin-top: 10px; 
-            background-color: #004a99; 
-            color: white; 
-            border: none; 
-            border-radius: 6px; 
-            font-size: 1.1rem;
-            font-weight: bold; 
-            cursor: pointer;
-            text-transform: uppercase;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        }
-
-        button:active {
-            transform: scale(0.98);
-            background-color: #003366;
-        }
-
-        .info-data { 
-            font-size: 0.8rem; 
-            color: #d9534f; 
-            margin-top: 8px; 
-            font-weight: 500;
-        }
-
-        /* Ajuste para telas maiores (Desktop) */
-        @media (min-width: 600px) {
-            body { padding: 30px; }
-            .container { max-width: 500px; padding: 25px; }
-        }
+        /* (Seu CSS existente permanece inalterado) */
+        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; padding: 10px; background-color: #f4f4f9; margin: 0; }
+        .container { max-width: 100%; margin: auto; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; border-bottom: 2px solid #004a99; padding-bottom: 10px; font-size: 1.5rem; margin-top: 10px; }
+        .section { margin-bottom: 20px; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #fff; }
+        h3 { margin-top: 0; color: #004a99; font-size: 1.1rem; border-left: 4px solid #004a99; padding-left: 8px; }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.85rem; color: #555; text-transform: uppercase; }
+        select, input { width: 100%; height: 48px; padding: 10px; margin-top: 5px; border: 1px solid #bbb; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        input[readonly] { background-color: #eee; color: #333; font-weight: bold; }
+        button { width: 100%; padding: 16px; margin-top: 10px; background-color: #004a99; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+        button:active { transform: scale(0.98); background-color: #003366; }
+        .info-data { font-size: 0.8rem; color: #d9534f; margin-top: 8px; font-weight: 500; }
+        @media (min-width: 600px) { body { padding: 30px; } .container { max-width: 500px; padding: 25px; } }
     </style>
 </head>
 <body>
@@ -120,7 +32,7 @@
        <div class="section">
             <h3>Dados do Requerente</h3>
             <label>GRADUAÇÃO</label>
-            <select name="posto_req">
+            <select name="posto_req" required>
                 <option value="" selected>Selecione</option>
                 <option value="SD">SD</option>
                 <option value="CB">CB</option>
@@ -128,22 +40,24 @@
             </select>
             
             <label>NOME</label>
-            <select name="nome_req" id="nome_req" onchange="vincularMatricula('req')">
+            <select name="nome_req" id="nome_req" onchange="vincularDados('req')" required>
                 <option value="">Selecione o nome...</option>
-                <option value="C. AZEVEDO" data-num="31736">C. AZEVEDO</option>
-                <option value="BRUNO" data-num="36338">BRUNO</option>
-                <option value="FEITOZA" data-num="34946">FEITOZA</option>
-                <option value="J. DINIZ" data-num="32690">J. DINIZ</option>
+                <option value="C. AZEVEDO" data-num="31736" data-assinatura="azevedo.png">C. AZEVEDO</option>
+                <option value="BRUNO" data-num="36338" data-assinatura="bruno.png">BRUNO</option>
+                <option value="FEITOZA" data-num="34946" data-assinatura="feitoza.png">FEITOZA</option>
+                <option value="J. DINIZ" data-num="32690" data-assinatura="diniz.png">J. DINIZ</option>
             </select>
 
             <label>NUMERAL</label>
             <input name="num_req" id="num_req" readonly placeholder="Automático">
+            
+            <input type="hidden" name="assinatura_req_file" id="assinatura_req_file">
         </div>
 
         <div class="section">
             <h3>Dados do Substituto</h3>
             <label>GRADUAÇÃO</label>
-            <select name="posto_sub">
+            <select name="posto_sub" required>
                 <option value="" selected>Selecione</option>
                 <option value="SD">SD</option>
                 <option value="CB">CB</option>
@@ -151,16 +65,18 @@
             </select>
 
             <label>NOME</label>
-            <select name="nome_sub" id="nome_sub" onchange="vincularMatricula('sub')">
+            <select name="nome_sub" id="nome_sub" onchange="vincularDados('sub')" required>
                 <option value="">Selecione o nome...</option>
-                <option value="C. AZEVEDO" data-num="31736">C. AZEVEDO</option>
-                <option value="BRUNO" data-num="36338">BRUNO</option>
-                <option value="FEITOZA" data-num="34946">FEITOZA</option>
-                <option value="J. DINIZ" data-num="32690">J. DINIZ</option>
+                <option value="C. AZEVEDO" data-num="31736" data-assinatura="azevedo.png">C. AZEVEDO</option>
+                <option value="BRUNO" data-num="36338" data-assinatura="bruno.png">BRUNO</option>
+                <option value="FEITOZA" data-num="34946" data-assinatura="feitoza.png">FEITOZA</option>
+                <option value="J. DINIZ" data-num="32690" data-assinatura="diniz.png">J. DINIZ</option>
             </select>
 
             <label>NUMERAL</label>
             <input name="num_sub" id="num_sub" readonly placeholder="Automático">
+            
+            <input type="hidden" name="assinatura_sub_file" id="assinatura_sub_file">
         </div>
 
         <div class="section">
@@ -178,19 +94,25 @@
 <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
 
 <script>
-    function vincularMatricula(alvo) {
+    // Função renomeada e atualizada para vincular Matrícula E Assinatura
+    function vincularDados(alvo) {
         const select = document.getElementById('nome_' + alvo);
-        const input = document.getElementById('num_' + alvo);
-        const matricula = select.options[select.selectedIndex].getAttribute('data-num');
-        input.value = matricula ? matricula : "";
+        const selectedOption = select.options[select.selectedIndex];
+        
+        // 1. Vincula a Matrícula (visível)
+        const inputNum = document.getElementById('num_' + alvo);
+        const matricula = selectedOption.getAttribute('data-num');
+        inputNum.value = matricula ? matricula : "";
+        
+        // 2. Vincula o arquivo de assinatura (oculto)
+        const inputAssinatura = document.getElementById('assinatura_' + alvo + '_file');
+        const arquivoAssinatura = selectedOption.getAttribute('data-assinatura');
+        inputAssinatura.value = arquivoAssinatura ? arquivoAssinatura : "";
     }
 
+    // Configuração do Flatpickr (inalterada)
     flatpickr("#calendario", {
-        mode: "multiple",
-        dateFormat: "d/m/Y",
-        locale: "pt",
-        conjunction: " e ",
-        disableMobile: "true", // Força o uso do flatpickr em vez do calendário nativo do celular (que é pior para multiselecção)
+        mode: "multiple", dateFormat: "d/m/Y", locale: "pt", conjunction: " e ", disableMobile: "true",
         onChange: function(selectedDates, dateStr, instance) {
             if (selectedDates.length > 2) {
                 instance.setDate([selectedDates[selectedDates.length - 2], selectedDates[selectedDates.length - 1]]);
@@ -201,4 +123,3 @@
 
 </body>
 </html>
-
