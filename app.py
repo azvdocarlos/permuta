@@ -11,24 +11,27 @@ USUARIOS = {
         "senha": "123", 
         "nome": "C. AZEVEDO", 
         "num": "31736", 
+        "posto": "CB", # Adicionado aqui
         "assinatura": "https://raw.githubusercontent.com/azvdocarlos/permuta/main/assinaturas/azevedo.png"
     },
     "36338": {
         "senha": "456", 
         "nome": "BRUNO", 
         "num": "36338", 
+        "posto": "SD", # Exemplo
         "assinatura": "https://raw.githubusercontent.com/azvdocarlos/permuta/main/assinaturas/bruno.png"
     }
 }
 
+# Na rota principal, certifique-se de que está passando o 'militar' para o template
 @app.route('/')
 def index():
     if 'user' not in session:
         return redirect(url_for('login'))
     
-    # Pega os dados do militar que logou
     dados_militar = USUARIOS.get(session['user'])
     return render_template('index.html', militar=dados_militar)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
