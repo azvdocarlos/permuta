@@ -2,84 +2,108 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Requerimento de Permuta PMCE</title>
+    <title>Requerimento de Permuta PMCE - Layout Oficial</title>
     <style>
-        /* Zera margens do navegador e define margens mínimas nas bordas da folha */
+        @page {
+            size: A4;
+            margin: 20mm 15mm; /* Margens padrão de documento oficial */
+        }
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.0; /* Linhas coladas */
-            margin: 2mm; /* Margem externa mínima para não cortar na impressora */
+            line-height: 1.4; /* Altura de linha para leitura confortável, como na imagem */
+            margin: 0;
             padding: 0;
             color: #000;
-            font-size: 11px; /* Fonte levemente menor para caber tudo próximo */
+            font-size: 13px; /* Tamanho de fonte padrão para documentos */
         }
 
-        /* Tabela do cabeçalho sem espaços externos */
+        /* Tabela do cabeçalho com bordas e espaçamento */
         .header-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 5px;
+            margin-bottom: 25px; /* Espaço generoso após o cabeçalho */
         }
         .header-table td {
             border: 1px solid black;
-            padding: 2px; /* Reduzi o preenchimento interno das células */
+            padding: 12px 8px; /* Padding vertical para dar altura às células */
             text-align: center;
             vertical-align: middle;
             font-weight: bold;
+            font-size: 12px;
         }
 
-        /* Conteúdo do requerimento */
+        /* Subtítulo centralizado */
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 30px; /* Espaço antes do corpo do texto */
+        }
+
+        /* Conteúdo principal do requerimento */
         .request-content {
-            margin: 5px 0;
+            margin-bottom: 25px; /* Espaço antes da citação da transgressão */
             text-align: justify;
+            text-indent: 2em; /* Recuo na primeira linha do parágrafo */
         }
 
-        p {
-            margin: 2px 0; /* Espaçamento mínimo entre parágrafos */
-            padding: 0;
+        /* Caixa de Motivo centralizada */
+        .motivo-box {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 20px 0;
         }
 
-        .transgressao {
+        /* Seção da citação da Transgressão Disciplinar */
+        .transgressao-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .transgressao-linha {
+            width: 80%; /* Linha horizontal acima da citação */
+            border-top: 1px solid black;
+            margin: 0 auto 10px auto;
+        }
+        .transgressao-texto {
             font-style: italic;
             font-weight: bold;
-            text-align: center;
-            display: block;
-            margin: 5px 0;
-            font-size: 10px;
+            font-size: 12px;
         }
 
-        /* Seção de critérios bem compacta */
+        /* Seção de critérios */
         .criterios {
-            font-size: 10px;
-            margin-top: 5px;
+            font-size: 12px;
+            text-align: justify;
         }
         .criterios h3 {
-            font-size: 11px;
-            text-decoration: underline;
-            margin: 0;
+            font-size: 13px;
+            margin: 0 0 10px 0;
             padding: 0;
         }
         .criterios p {
-            margin: 1px 0;
+            margin: 0 0 8px 0; /* Espaçamento entre os itens dos critérios */
+            padding: 0;
+        }
+        /* Destaque para textos sublinhados dentro dos critérios */
+        .criterios u {
+            font-weight: bold;
         }
 
-        /* Seção de assinaturas encostada no final do texto */
+        /* Seção de assinaturas no final */
         .signature-section {
-            margin-top: 25px; /* Espaço apenas para a caneta */
+            margin-top: 80px; /* Espaço grande para as assinaturas manuais */
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around; /* Distribui as assinaturas */
         }
         .sig-box {
-            width: 45%;
+            width: 40%;
             text-align: center;
-            border-top: 1px solid black;
-            padding-top: 2px;
-            font-size: 10px;
+            font-size: 12px;
         }
-
-        strong {
-            text-transform: uppercase;
+        .sig-line {
+            border-top: 1px solid black;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -87,45 +111,36 @@
 
     <table class="header-table">
         <tr>
-            <td style="width: 25%;">V I S T O:<br>____/____/2026<br>Cmt do 31º BPM</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>Cmt do 31º BPM</td>
             <td style="width: 50%;">ESTADO DO CEARÁ<br>SSPDS/ PMCE / CPI – Sul<br>31º BPM / 8 °CRPM<br>Jaguaribe/Ceará</td>
-            <td style="width: 25%;">V I S T O:<br>____/____/2026<br>P1 da Cia</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>P1 da Cia</td>
         </tr>
     </table>
 
-    <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">
+    <div class="subtitle">
         (Solicitação de substituição de PM em serviço)
     </div>
 
     <div class="request-content">
         Eu, <strong>{{posto_req}} PM {{nome_req}} Nº {{num_req}}</strong>, venho a V.Sª., requerer que o 
         <strong>{{posto_sub}} PM {{nome_sub}} Nº {{num_sub}}</strong>, desta OPM, assuma o serviço, em substituição a mim, 
-        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
+        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes (requerente e substituído) estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
     </div>
     
-    <p style="text-align: center; font-weight: bold;">MOTIVOS PESSOAIS</p>
+    <div class="motivo-box">
+        MOTIVOS PESSOAIS
+    </div>
 
-    <div class="transgressao">
-        ''permutar serviço sem permissão da autoridade competente''<br>
-        (Transgressão MÉDIA, art. 13, §2º, inciso XXVII, Lei nº 13.407/2003);
+    <div class="transgressao-container">
+        <div class="transgressao-linha"></div>
+        <div class="transgressao-texto">
+            ''permutar serviço sem permissão da autoridade competente''<br>
+            (Transgressão MÉDIA, art. 13, §2º, inciso XXVII, Lei nº 13.407/2003);
+        </div>
     </div>
      
     <div class="criterios">
         <h3>Critérios</h3>
-        <p><strong>1:</strong> Policiais da CIA de Jaguaribe-CE podem permutar no máx. 06 serviços de 12h e 03 de 24h/mês na sede (04 para Destacamentos).</p>
-        <p><strong>2:</strong> Proibida modalidade de escala diferente da determinada pelo CG (BCG nº 015/2020): 12x24, 12x48 (Sede) e 48x96 (Destacamentos).</p>
-        <p><strong>3:</strong> Requerimentos devem ser entregues até 48h antes do serviço. Finais de semana: até as 16h00 da quinta-feira.</p>
-        <p><strong>-</strong> O descumprimento dos critérios 1 e 2 sujeita os envolvidos às medidas legais cabíveis.</p>
-    </div>
-
-    <div class="signature-section">
-        <div class="sig-box">
-            Assinatura do PM Requerente
-        </div>
-        <div class="sig-box">
-            Assinatura do PM Substituto
-        </div>
-    </div>
-
-</body>
-</html>
+        <p><strong>1:</strong> Somente poderá o policial militar pertencente a esta CIA independente de Jaguaribe-CE permutar, no máximo, por motivo devidamente justificado, 06 (seis) serviços de 12h e 03 (três) serviços de 24h por mês na sede, limitando 04 (quatro) para os Destacamentos.</p>
+        <p><strong>2:</strong> Em hipótese alguma será permitida modalidade de escala de serviço diferente da que fora outrora determinada pelo Comando Geral desta corporação, conforme BCG nº 015 de 22/01/2020, quais sejam: <u>12x24, 12x48</u> para a Sede e <u>48 x 96</u> para os Destacamentos.</p>
+        <p><strong>3:</strong> Os requerimentos de permutas devem ser remetidos até <u>48h do dia anterior</u> ao serviço objeto de
