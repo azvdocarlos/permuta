@@ -195,6 +195,23 @@
     </div>
     
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+    window.onload = function() {
+        const elemento = document.querySelector(".folha-a4"); // Seleciona sua folha
+        const opcoes = {
+            margin: [10, 10, 10, 10],
+            filename: 'Permuta_PMCE_{{nome_req}}.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Gera e baixa automaticamente
+        html2pdf().set(opcoes).from(elemento).save();
+    };
+</script>
 
 </body>
 </html>
