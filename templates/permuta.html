@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Requerimento de Permuta PMCE - Layout Oficial</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 15mm; /* Margens padrão de documento oficial */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4; /* Altura de linha para leitura confortável, como na imagem */
+            margin: 0;
+            padding: 0;
+            color: #000;
+            font-size: 13px; /* Tamanho de fonte padrão para documentos */
+        }
+
+        /* Tabela do cabeçalho com bordas e espaçamento */
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px; /* Espaço generoso após o cabeçalho */
+        }
+        .header-table td {
+            border: 1px solid black;
+            padding: 5px 2px; /* Padding vertical para dar altura às células */
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Subtítulo centralizado */
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 30px; /* Espaço antes do corpo do texto */
+        }
+
+        /* Conteúdo principal do requerimento */
+        .request-content {
+            margin-bottom: 25px; /* Espaço antes da citação da transgressão */
+            text-align: justify;
+            text-indent: 2em; /* Recuo na primeira linha do parágrafo */
+        }
+
+        /* Caixa de Motivo centralizada */
+        .motivo-box {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 20px 0;
+        }
+
+        /* Seção da citação da Transgressão Disciplinar */
+        .transgressao-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .transgressao-linha {
+            width: 80%; /* Linha horizontal acima da citação */
+            border-top: 1px solid black;
+            margin: 0 auto 10px auto;
+        }
+        .transgressao-texto {
+            font-style: italic;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Seção de critérios */
+        .criterios {
+            font-size: 12px;
+            text-align: justify;
+        }
+        .criterios h3 {
+            font-size: 13px;
+            margin: 0 0 10px 0;
+            padding: 0;
+        }
+        .criterios p {
+            margin: 0 0 8px 0; /* Espaçamento entre os itens dos critérios */
+            padding: 0;
+        }
+        /* Destaque para textos sublinhados dentro dos critérios */
+        .criterios u {
+            font-weight: bold;
+        }
+
+        /* Seção de assinaturas no final */
+        .signature-section {
+            margin-top: 80px; /* Espaço grande para as assinaturas manuais */
+            width: 100%;
+            display: flex;
+            justify-content: space-around; /* Distribui as assinaturas */
+        }
+        .sig-box {
+            width: 40%;
+            text-align: center;
+            font-size: 12px;
+        }
+        .sig-line {
+            border-top: 1px solid black;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <table class="header-table">
+        <tr>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>Cmt do 31º BPM</td>
+            <td style="width: 50%;">ESTADO DO CEARÁ<br>SSPDS/ PMCE / CPI – Sul<br>31º BPM / 8 °CRPM<br>Jaguaribe/Ceará</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>P1 da Cia</td>
+        </tr>
+    </table>
+
+    <div class="subtitle">
+        (Solicitação de substituição de PM em serviço)
+    </div>
+
+    <div class="request-content">
+        Eu, <strong>{{posto_req}} PM {{nome_req}} Nº {{num_req}}</strong>, venho a V.Sª., requerer que o 
+        <strong>{{posto_sub}} PM {{nome_sub}} Nº {{num_sub}}</strong>, desta OPM, assuma o serviço, em substituição a mim, 
+        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes (requerente e substituto) estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
+    </div>
+    
+    <div class="motivo-box">
+        MOTIVOS PESSOAIS
+    </div>
+
+    <div class="transgressao-container">
+        <div class="transgressao-linha"></div>
+        <div class="transgressao-texto">
+            ''permutar serviço sem permissão da autoridade competente''<br>
+            (Transgressão MÉDIA, art. 13, §2º, inciso XXVII, Lei nº 13.407/2003);
+        </div>
+    </div>
+     
+    <div class="criterios">
+        <h3>Critérios</h3>
+        <p><strong>1:</strong> Somente poderá o policial militar pertencente a esta CIA independente de Jaguaribe-CE permutar, no máximo, por motivo devidamente justificado, 06 (seis) serviços de 12h e 03 (três) serviços de 24h por mês na sede, limitando 04 (quatro) para os Destacamentos.</p>
+        <p><strong>2:</strong> Em hipótese alguma será permitida modalidade de escala de serviço diferente da que fora outrora determinada pelo Comando Geral desta corporação, conforme BCG nº 015 de 22/01/2020, quais sejam: <u>12x24, 12x48</u> para a Sede e <u>48 x 96</u> para os Destacamentos.</p>
+        <p><strong>3:</strong> Os requerimentos de permutas devem ser remetidos até <u>48h do dia anterior</u> ao serviço objeto de permuta pessoalmente ou por telefone ao um dos oficiais da cia, para prévia análise. Aos serviços de finais de semana, tal remessa deve ocorrer até <u>as 16h00 da quinta feira</u>, e nos feriados até as <u>48h dia útil anterior</u>.</p>
+        <p><strong>4:</strong> Qualquer modalidade de serviço que não atente aos critérios: 1 e 2, será considerada sem autorização e, portanto, sujeita às medidas legais cabíveis.</p>
+        <p><strong>5:</strong> Estes critérios para permuta da CIA, entrarão em vigor em 22/09/2023.</p>
+    </div>
+
+    <style>
+    /* CSS para o PDF */
+    .signature-section {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        page-break-inside: avoid; /* Evita quebrar a assinatura entre páginas */
+    }
+.sig-box {
+    width: 40%;
+    text-align: center;
+}
+
+.assinatura-imagem {
+    height: 50px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 5px auto; /* espaço entre imagem e linha */
+}
+
+.sig-line {
+    border-top: 1px solid black;
+    margin-top: 5px;
+}
+
+</style>
+
+<div class="signature-section">
+    
+    <div class="sig-box">
+        <img src="assinaturas/{{assinatura_req_file}}" alt="Assinatura Requerente" class="assinatura-imagem">
+        
+        <div class="sig-line"></div>
+        Assinatura do PM Requerente
+    </div>
+    
+    <div class="sig-box">
+        <img src="assinaturas/{{assinatura_sub_file}}" alt="Assinatura Substituto" class="assinatura-imagem">
+        
+        <div class="sig-line"></div>
+        Assinatura do PM Substituto
+    </div>
+    
+</div>
+
+</body>
+</html>
