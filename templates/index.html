@@ -29,22 +29,6 @@
 
     <form action="/gerar" method="post">
 
-   <div class="section">
-    <h3>Dados do Requerente</h3>
-    
-    <label>GRADUAÇÃO</label>
-    <input type="text" name="posto_req" value="{{ militar.posto }}" readonly>
-
-    <label>NOME</label>
-    <input type="text" name="nome_req" value="{{ militar.nome }}" readonly>
-
-    <label>NUMERAL</label>
-    <input type="text" name="num_req" value="{{ militar.num }}" readonly>
-    
-    <input type="hidden" name="assinatura_req_file" value="{{ militar.assinatura }}">
-  
-    <p style="font-size: 0.8rem; color: green;">✅ Identificado pelo sistema</p>
-</div>
 
 <div class="section">
     <h3>Dados do Requerente (Automático)</h3>
