@@ -10,8 +10,8 @@ def index():
 
 @app.route('/gerar', methods=['POST'])
 def gerar():
-    assinatura_req_file = request.form['assinatura_req']
-    assinatura_sub_file = request.form['assinatura_sub']
+    assinatura_req_file = request.form['assinatura_req_file']
+    assinatura_sub_file = request.form['assinatura_sub_file']
 
     html = render_template(
         'permuta.html',
