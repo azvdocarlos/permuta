@@ -3,13 +3,13 @@ import os
 from datetime import timedelta
 
 app = Flask(__name__)
-# Chave de segurança para as sessões
+# Chave de segurança - Use a do ambiente ou a padrão
 app.secret_key = os.environ.get('SECRET_KEY', 'pmce_secret_2026')
 
-# Configura o tempo de sessão para 2 minutos
+# 1. DEFINE O TEMPO DE SESSÃO (2 MINUTOS)
 app.permanent_session_lifetime = timedelta(minutes=2)
 
-# Cadastro de usuários para o LOGIN (independente dos militares)
+# Cadastro de usuários para o LOGIN
 ACESSO = {
     "admin": "31736",
     "fiscal": "12345"
@@ -17,6 +17,7 @@ ACESSO = {
 
 @app.route('/')
 def index():
+    # 2. PROTEÇÃO SIMPLES
     if not session.get('logado'):
         return redirect(url_for('login'))
     return render_template('index.html')
@@ -28,21 +29,22 @@ def login():
         senha_input = request.form.get('senha')
         
         if ACESSO.get(user_input) == senha_input:
-            session.permanent = True  # Ativa o timer de 2 min
+            # 3. ATIVA O TIMER DE 2 MINUTOS NO MOMENTO DO LOGIN
+            session.permanent = True  
             session['logado'] = True
             return redirect(url_for('index'))
         
         return "Usuário ou senha incorretos! <a href='/login'>Tentar novamente</a>"
     return render_template('login.html')
 
-# --- ESTA É A ROTA QUE GERA O PDF E ESTAVA FALTANDO ---
 @app.route('/gerar', methods=['POST'])
 def gerar():
+    # Proteção para ninguém gerar PDF sem estar logado
     if not session.get('logado'):
         return redirect(url_for('login'))
     
     try:
-        # Pega todos os dados vindos do formulário do index.html
+        # Mantive seus campos originais exatamente como estavam
         dados = {
             "posto_req": request.form.get('posto_req'),
             "nome_req": request.form.get('nome_req'),
@@ -54,10 +56,7 @@ def gerar():
             "assinatura_req_file": request.form.get('assinatura_req_file'),
             "assinatura_sub_file": request.form.get('assinatura_sub_file')
         }
-        
-        # Usa o seu arquivo permuta.html para exibir o resultado
         return render_template('permuta.html', **dados)
-    
     except Exception as e:
         return f"Erro ao gerar documento: {str(e)}"
 
