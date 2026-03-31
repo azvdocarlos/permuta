@@ -120,6 +120,11 @@
         }
     });
 </script>
-
+<script>
+  // Redireciona para logout após 120 segundos
+  setTimeout(() => {
+      window.location.href = "/logout";
+  }, 120000); // 120000ms = 120s
+</script>
 </body>
 </html>
