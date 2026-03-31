@@ -1,25 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+from datetime import timedelta
 
 app = Flask(__name__)
-# Chave para manter a sessão ativa no celular
-app.secret_key = os.environ.get('SECRET_KEY', 'pmce_seguro_2026')
+# Chave de segurança para as sessões
+app.secret_key = os.environ.get('SECRET_KEY', 'pmce_secret_2026')
 
-# LISTA DE QUEM PODE ENTRAR NO SISTEMA
-# "usuario": "senha"
+# Configura o tempo de sessão para 2 minutos
+app.permanent_session_lifetime = timedelta(minutes=2)
+
+# Cadastro de usuários para o LOGIN (independente dos militares)
 ACESSO = {
     "admin": "31736",
-    "fiscal": "12345",
-    "carlos": "senhapm"
+    "fiscal": "12345"
 }
 
 @app.route('/')
 def index():
-    # Se não estiver logado, manda para a tela de login
     if not session.get('logado'):
         return redirect(url_for('login'))
-    
-    # Se estiver logado, abre o seu formulário original (index.html)
     return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -28,15 +27,39 @@ def login():
         user_input = request.form.get('usuario')
         senha_input = request.form.get('senha')
         
-        # Verifica se o usuário e senha batem com a lista ACESSO
         if ACESSO.get(user_input) == senha_input:
+            session.permanent = True  # Ativa o timer de 2 min
             session['logado'] = True
             return redirect(url_for('index'))
         
-        return "Acesso negado! <a href='/login'>Tentar novamente</a>"
-    
-    # Se for GET, mostra a tela de login
+        return "Usuário ou senha incorretos! <a href='/login'>Tentar novamente</a>"
     return render_template('login.html')
+
+# --- ESTA É A ROTA QUE GERA O PDF E ESTAVA FALTANDO ---
+@app.route('/gerar', methods=['POST'])
+def gerar():
+    if not session.get('logado'):
+        return redirect(url_for('login'))
+    
+    try:
+        # Pega todos os dados vindos do formulário do index.html
+        dados = {
+            "posto_req": request.form.get('posto_req'),
+            "nome_req": request.form.get('nome_req'),
+            "num_req": request.form.get('num_req'),
+            "posto_sub": request.form.get('posto_sub'),
+            "nome_sub": request.form.get('nome_sub'),
+            "num_sub": request.form.get('num_sub'),
+            "data": request.form.get('data'),
+            "assinatura_req_file": request.form.get('assinatura_req_file'),
+            "assinatura_sub_file": request.form.get('assinatura_sub_file')
+        }
+        
+        # Usa o seu arquivo permuta.html para exibir o resultado
+        return render_template('permuta.html', **dados)
+    
+    except Exception as e:
+        return f"Erro ao gerar documento: {str(e)}"
 
 @app.route('/logout')
 def logout():
