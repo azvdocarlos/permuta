@@ -1,42 +1,48 @@
-from flask import Flask, render_template, request, make_response
-from weasyprint import HTML
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 
 app = Flask(__name__)
+# Chave para manter a sessão ativa no celular
+app.secret_key = os.environ.get('SECRET_KEY', 'pmce_seguro_2026')
+
+# LISTA DE QUEM PODE ENTRAR NO SISTEMA
+# "usuario": "senha"
+ACESSO = {
+    "admin": "31736",
+    "fiscal": "12345",
+    "carlos": "senhapm"
+}
 
 @app.route('/')
 def index():
+    # Se não estiver logado, manda para a tela de login
+    if not session.get('logado'):
+        return redirect(url_for('login'))
+    
+    # Se estiver logado, abre o seu formulário original (index.html)
     return render_template('index.html')
 
-@app.route('/gerar', methods=['POST'])
-def gerar():
-    assinatura_req_file = request.form['assinatura_req_file']
-    assinatura_sub_file = request.form['assinatura_sub_file']
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user_input = request.form.get('usuario')
+        senha_input = request.form.get('senha')
+        
+        # Verifica se o usuário e senha batem com a lista ACESSO
+        if ACESSO.get(user_input) == senha_input:
+            session['logado'] = True
+            return redirect(url_for('index'))
+        
+        return "Acesso negado! <a href='/login'>Tentar novamente</a>"
+    
+    # Se for GET, mostra a tela de login
+    return render_template('login.html')
 
-    html = render_template(
-        'permuta.html',
-        posto_req=request.form['posto_req'],
-        nome_req=request.form['nome_req'],
-        num_req=request.form['num_req'],
-        posto_sub=request.form['posto_sub'],
-        nome_sub=request.form['nome_sub'],
-        num_sub=request.form['num_sub'],
-        data=request.form['data'],
-        assinatura_req_file=assinatura_req_file,
-        assinatura_sub_file=assinatura_sub_file
-    )
-
-    pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
-
-    data_formatada = request.form['data'].replace("/", "").replace("-", "")
-    nome_pdf = f"permuta{data_formatada}.pdf"
-
-    response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = f'attachment; filename={nome_pdf}'
-
-    return response
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
