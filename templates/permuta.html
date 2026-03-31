@@ -4,57 +4,68 @@
     <meta charset="UTF-8">
     <title>Requerimento de Permuta PMCE</title>
     <style>
+        /* Zera margens do navegador e define margens mínimas nas bordas da folha */
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 5px 5px;
+            line-height: 1.0; /* Linhas coladas */
+            margin: 2mm; /* Margem externa mínima para não cortar na impressora */
+            padding: 0;
             color: #000;
+            font-size: 11px; /* Fonte levemente menor para caber tudo próximo */
         }
+
+        /* Tabela do cabeçalho sem espaços externos */
         .header-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
         .header-table td {
             border: 1px solid black;
-            padding: 10px;
+            padding: 2px; /* Reduzi o preenchimento interno das células */
             text-align: center;
             vertical-align: middle;
-            font-size: 12px;
             font-weight: bold;
         }
+
+        /* Conteúdo do requerimento */
         .request-content {
-            margin-top: 30px;
+            margin: 5px 0;
             text-align: justify;
         }
-        .input-line {
-            border-bottom: 1px solid black;
-            display: inline-block;
-            min-width: 200px;
+
+        p {
+            margin: 2px 0; /* Espaçamento mínimo entre parágrafos */
+            padding: 0;
         }
-        .motivo-box {
-            border: 1px solid black;
-            padding: 15px;
-            margin: 20px 0;
-            min-height: 80px;
-        }
+
         .transgressao {
             font-style: italic;
             font-weight: bold;
             text-align: center;
             display: block;
-            margin: 10px 0;
+            margin: 5px 0;
+            font-size: 10px;
         }
+
+        /* Seção de critérios bem compacta */
         .criterios {
-            font-size: 12px;
-            margin-top: 20px;
+            font-size: 10px;
+            margin-top: 5px;
         }
         .criterios h3 {
-            font-size: 14px;
+            font-size: 11px;
             text-decoration: underline;
+            margin: 0;
+            padding: 0;
         }
+        .criterios p {
+            margin: 1px 0;
+        }
+
+        /* Seção de assinaturas encostada no final do texto */
         .signature-section {
-            margin-top: 50px;
+            margin-top: 25px; /* Espaço apenas para a caneta */
             width: 100%;
             display: flex;
             justify-content: space-between;
@@ -63,8 +74,12 @@
             width: 45%;
             text-align: center;
             border-top: 1px solid black;
-            padding-top: 5px;
-            font-size: 12px;
+            padding-top: 2px;
+            font-size: 10px;
+        }
+
+        strong {
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -72,25 +87,23 @@
 
     <table class="header-table">
         <tr>
-            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>Cmt do 31º BPM</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br>Cmt do 31º BPM</td>
             <td style="width: 50%;">ESTADO DO CEARÁ<br>SSPDS/ PMCE / CPI – Sul<br>31º BPM / 8 °CRPM<br>Jaguaribe/Ceará</td>
-            <td style="width: 25%;">V I S T O:<br>____/____/2026<br><br>P1 da Cia</td>
+            <td style="width: 25%;">V I S T O:<br>____/____/2026<br>P1 da Cia</td>
         </tr>
     </table>
 
-    <div style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+    <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">
         (Solicitação de substituição de PM em serviço)
     </div>
 
     <div class="request-content">
         Eu, <strong>{{posto_req}} PM {{nome_req}} Nº {{num_req}}</strong>, venho a V.Sª., requerer que o 
         <strong>{{posto_sub}} PM {{nome_sub}} Nº {{num_sub}}</strong>, desta OPM, assuma o serviço, em substituição a mim, 
-        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes (requerente e substituído) 
-        estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
+        no(s) dia(s) <strong>{{data}}</strong>, haja vista que as partes estão em comum acordo e considerando a compatibilidade funcional de ambos, pelo motivo que segue:
     </div>
     
-<p style="text-align: center; font-weight: bold;">MOTIVOS PESSOAIS</p>
-
+    <p style="text-align: center; font-weight: bold;">MOTIVOS PESSOAIS</p>
 
     <div class="transgressao">
         ''permutar serviço sem permissão da autoridade competente''<br>
@@ -99,12 +112,10 @@
      
     <div class="criterios">
         <h3>Critérios</h3>
-        <p><strong>1:</strong> Somente poderá o policial militar pertencente a esta CIA independente de Jaguaribe-CE permutar, no máximo, por motivo devidamente justificado, 06 (seis) serviços de 12h e 03 (três) serviços de 24h por mês na sede, limitando 04 (quatro) para os Destacamentos.</p>
-        <p><strong>2:</strong> Em hipótese alguma será permitida modalidade de escala de serviço diferente da que fora outrora determinada pelo Comando Geral desta corporação, conforme BCG nº 015 de 22/01/2020, quais sejam: 12 x 24, 12x48 para a Sede e 48 x 96 para os Destacamentos.</p>
-        <p><strong>3:</strong> Os requerimentos de permutas devem ser remetidos até 48h do dia anterior ao serviço objeto de permuta pessoalmente ou por telefone ao um dos oficiais da cia, para prévia análise.</p>
-        <p>Aos serviços de finais de semana, tal remessa deve ocorrer até as 16h00 da quinta feira, e nos feriados até as 48h dia útil anterior.</p>
-        <p><strong>-</strong> Qualquer modalidade de serviço que não atente aos critérios: 1 e 2, será considerada sem autorização e, portanto, sujeita às medidas legais cabíveis.</p>
-        <p><strong>-</strong> Estes critérios para permuta da CIA, entrarão em vigor em 22/09/2023.</p>
+        <p><strong>1:</strong> Policiais da CIA de Jaguaribe-CE podem permutar no máx. 06 serviços de 12h e 03 de 24h/mês na sede (04 para Destacamentos).</p>
+        <p><strong>2:</strong> Proibida modalidade de escala diferente da determinada pelo CG (BCG nº 015/2020): 12x24, 12x48 (Sede) e 48x96 (Destacamentos).</p>
+        <p><strong>3:</strong> Requerimentos devem ser entregues até 48h antes do serviço. Finais de semana: até as 16h00 da quinta-feira.</p>
+        <p><strong>-</strong> O descumprimento dos critérios 1 e 2 sujeita os envolvidos às medidas legais cabíveis.</p>
     </div>
 
     <div class="signature-section">
