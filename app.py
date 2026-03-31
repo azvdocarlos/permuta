@@ -20,7 +20,10 @@ def gerar():
         data=request.form['data']
     )
 
-    pdf = HTML(string=html).write_pdf()
+    import os
+from weasyprint import HTML
+
+pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
 
     data_formatada = request.form['data'].replace("/", "").replace("-", "")
     nome_pdf = f"permuta{data_formatada}.pdf"
