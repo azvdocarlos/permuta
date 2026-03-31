@@ -158,24 +158,21 @@
         page-break-inside: avoid; /* Evita quebrar a assinatura entre páginas */
     }
     .sig-box {
-        width: 40%;
-        text-align: center;
-        position: relative;
-    }
-    .sig-line {
-        border-top: 1px solid black;
-        margin-top: 5px;
-    }
-    /* Estilo para a imagem da assinatura */
-    .assinatura-imagem {
-        height: 50px; /* Ajuste a altura conforme necessário */
-        max-width: 100%;
-        position: absolute;
-        bottom: 5px; /* Posiciona a imagem logo acima da linha */
-        left: 50%;
-        transform: translateX(-50%); /* Centraliza horizontalmente */
-        z-index: -1; /* Coloca a imagem atrás do texto da linha se necessário, ou remova */
-    }
+    width: 40%;
+    text-align: center;
+}
+
+.assinatura-imagem {
+    height: 50px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 5px auto; /* espaço entre imagem e linha */
+}
+
+.sig-line {
+    border-top: 1px solid black;
+    margin-top: 5px;
+}
 </style>
 
 <div class="signature-section">
