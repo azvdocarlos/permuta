@@ -72,6 +72,15 @@
 </head>
 <body>
    <div class="login-container">
+       <script>
+  // Tempo de sessão em milissegundos (120s = 120000ms)
+  const tempoSessao = 120000;
+
+  setTimeout(() => {
+      // Redireciona pro logout do Flask
+      window.location.href = "/logout";
+  }, tempoSessao);
+       </script>
     <h2>Entrar no Sistema</h2>
     <form method="POST">
         <input type="text" name="usuario" placeholder="Usuário" required>
