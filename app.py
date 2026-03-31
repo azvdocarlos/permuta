@@ -1,42 +1,53 @@
-from flask import Flask, render_template, request, make_response
-from weasyprint import HTML
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 
 app = Flask(__name__)
+app.secret_key = os.environ.get('SECRET_KEY', 'pmce_secret_2026')
+
+# CADASTRO CONTROLADO POR VOCÊ
+# Estrutura: "usuario": {"senha": "...", "nome": "...", "num": "...", "assinatura": "..."}
+USUARIOS = {
+    "31736": {
+        "senha": "123", 
+        "nome": "C. AZEVEDO", 
+        "num": "31736", 
+        "assinatura": "https://raw.githubusercontent.com/azvdocarlos/permuta/main/assinaturas/azevedo.png"
+    },
+    "36338": {
+        "senha": "456", 
+        "nome": "BRUNO", 
+        "num": "36338", 
+        "assinatura": "https://raw.githubusercontent.com/azvdocarlos/permuta/main/assinaturas/bruno.png"
+    }
+}
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    # Pega os dados do militar que logou
+    dados_militar = USUARIOS.get(session['user'])
+    return render_template('index.html', militar=dados_militar)
 
-@app.route('/gerar', methods=['POST'])
-def gerar():
-    assinatura_req_file = request.form['assinatura_req_file']
-    assinatura_sub_file = request.form['assinatura_sub_file']
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user_input = request.form.get('usuario')
+        senha_input = request.form.get('senha')
+        
+        if user_input in USUARIOS and USUARIOS[user_input]['senha'] == senha_input:
+            session['user'] = user_input
+            return redirect(url_for('index'))
+        return "Usuário ou senha incorretos. <a href='/login'>Tentar novamente</a>"
+    return render_template('login.html')
 
-    html = render_template(
-        'permuta.html',
-        posto_req=request.form['posto_req'],
-        nome_req=request.form['nome_req'],
-        num_req=request.form['num_req'],
-        posto_sub=request.form['posto_sub'],
-        nome_sub=request.form['nome_sub'],
-        num_sub=request.form['num_sub'],
-        data=request.form['data'],
-        assinatura_req_file=assinatura_req_file,
-        assinatura_sub_file=assinatura_sub_file
-    )
-
-    pdf = HTML(string=html, base_url=os.getcwd()).write_pdf()
-
-    data_formatada = request.form['data'].replace("/", "").replace("-", "")
-    nome_pdf = f"permuta{data_formatada}.pdf"
-
-    response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = f'attachment; filename={nome_pdf}'
-
-    return response
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
