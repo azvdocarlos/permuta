@@ -47,15 +47,37 @@
 </div>
 
 <div class="section">
-    <h3>Dados do Substituto</h3>
-    <label>NOME</label>
+    <h3>Dados do Requerente (Automático)</h3>
+    <input type="text" name="posto_req" value="{{ militar.posto }}" readonly>
+    <input type="text" name="nome_req" value="{{ militar.nome }}" readonly>
+    <input type="text" name="num_req" value="{{ militar.num }}" readonly>
+    <input type="hidden" name="assinatura_req_file" value="{{ militar.assinatura }}">
+</div>
+
+<div class="section">
+    <h3>Dados do Substituto (Manual)</h3>
+    
+    <label>POSTO/GRADUAÇÃO</label>
+    <select name="posto_sub" id="posto_sub" required>
+        <option value="">Selecione...</option>
+        <option value="ST">ST PM</option>
+        <option value="1SGT">1º SGT PM</option>
+        <option value="2SGT">2º SGT PM</option>
+        <option value="3SGT">3º SGT PM</option>
+        <option value="CB">CB PM</option>
+        <option value="SD">SD PM</option>
+    </select>
+
+    <label>NOME DO SUBSTITUTO</label>
     <select name="nome_sub" id="nome_sub" onchange="vincularDados('sub')" required>
-        <option value="">Selecione o substituto...</option>
+        <option value="">Selecione o nome...</option>
         <option value="C. AZEVEDO" data-num="31736" data-assinatura="...">C. AZEVEDO</option>
         <option value="BRUNO" data-num="36338" data-assinatura="...">BRUNO</option>
-        </select>
+    </select>
+
     <label>NUMERAL</label>
-    <input name="num_sub" id="num_sub" readonly>
+    <input name="num_sub" id="num_sub" readonly placeholder="Numeral automático">
+    
     <input type="hidden" name="assinatura_sub_file" id="assinatura_sub_file">
 </div>
 
