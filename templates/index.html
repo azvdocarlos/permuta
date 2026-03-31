@@ -30,54 +30,32 @@
     <form action="/gerar" method="post">
 
        <div class="section">
-            <h3>Dados do Requerente</h3>
-            <label>GRADUAÇÃO</label>
-            <select name="posto_req" required>
-                <option value="" selected>Selecione</option>
-                <option value="SD">SD</option>
-                <option value="CB">CB</option>
-                <option value="SGT">SGT</option>
-            </select>
-            
-            <label>NOME</label>
-            <select name="nome_req" id="nome_req" onchange="vincularDados('req')" required>
-                <option value="">Selecione o nome...</option>
-                <option value="C. AZEVEDO" data-num="31736" data-assinatura="azevedo.png">C. AZEVEDO</option>
-                <option value="BRUNO" data-num="36338" data-assinatura="bruno.png">BRUNO</option>
-                <option value="FEITOZA" data-num="34946" data-assinatura="feitoza.png">FEITOZA</option>
-                <option value="J. DINIZ" data-num="32690" data-assinatura="diniz.png">J. DINIZ</option>
-            </select>
+    <h3>Dados do Requerente</h3>
+    
+    <label>NOME</label>
+    <input type="text" name="nome_req" value="{{ militar.nome }}" readonly>
 
-            <label>NUMERAL</label>
-            <input name="num_req" id="num_req" readonly placeholder="Automático">
-            
-            <input type="hidden" name="assinatura_req_file" id="assinatura_req_file">
-        </div>
+    <label>NUMERAL</label>
+    <input type="text" name="num_req" value="{{ militar.num }}" readonly>
+    
+    <input type="hidden" name="assinatura_req_file" value="{{ militar.assinatura }}">
+    
+    <p style="font-size: 0.8rem; color: green;">✅ Identificado pelo sistema</p>
+</div>
 
-        <div class="section">
-            <h3>Dados do Substituto</h3>
-            <label>GRADUAÇÃO</label>
-            <select name="posto_sub" required>
-                <option value="" selected>Selecione</option>
-                <option value="SD">SD</option>
-                <option value="CB">CB</option>
-                <option value="SGT">SGT</option>
-            </select>
+<div class="section">
+    <h3>Dados do Substituto</h3>
+    <label>NOME</label>
+    <select name="nome_sub" id="nome_sub" onchange="vincularDados('sub')" required>
+        <option value="">Selecione o substituto...</option>
+        <option value="C. AZEVEDO" data-num="31736" data-assinatura="...">C. AZEVEDO</option>
+        <option value="BRUNO" data-num="36338" data-assinatura="...">BRUNO</option>
+        </select>
+    <label>NUMERAL</label>
+    <input name="num_sub" id="num_sub" readonly>
+    <input type="hidden" name="assinatura_sub_file" id="assinatura_sub_file">
+</div>
 
-            <label>NOME</label>
-            <select name="nome_sub" id="nome_sub" onchange="vincularDados('sub')" required>
-                <option value="">Selecione o nome...</option>
-                <option value="C. AZEVEDO" data-num="31736" data-assinatura="azevedo.png">C. AZEVEDO</option>
-                <option value="BRUNO" data-num="36338" data-assinatura="bruno.png">BRUNO</option>
-                <option value="FEITOZA" data-num="34946" data-assinatura="feitoza.png">FEITOZA</option>
-                <option value="J. DINIZ" data-num="32690" data-assinatura="diniz.png">J. DINIZ</option>
-            </select>
-
-            <label>NUMERAL</label>
-            <input name="num_sub" id="num_sub" readonly placeholder="Automático">
-            
-            <input type="hidden" name="assinatura_sub_file" id="assinatura_sub_file">
-        </div>
 
         <div class="section">
             <h3>DATA</h3>
