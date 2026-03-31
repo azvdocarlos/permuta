@@ -26,6 +26,7 @@ def login_required(f):
 # ===== Login / Logout =====
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    erro = None
     if request.method == "POST":
         usuario = request.form["usuario"]
         senha = request.form["senha"]
@@ -33,8 +34,8 @@ def login():
             session["usuario"] = usuario
             return redirect(url_for("index"))
         else:
-            return "Usuário ou senha incorretos", 401
-    return render_template("login.html")
+            erro = "Login ou senha incorretos"
+    return render_template("login.html", erro=erro)
 
 @app.route("/logout")
 def logout():
