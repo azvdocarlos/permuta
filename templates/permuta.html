@@ -179,17 +179,19 @@
 <div class="signature-section">
     
     <div class="sig-box">
-        <img src="assinaturas/{{assinatura_req_file}}" alt="Assinatura Requerente" class="assinatura-imagem">
+        <img src="{{assinatura_req_file}}" alt="Assinatura Requerente" class="assinatura-imagem">
         
         <div class="sig-line"></div>
-        Assinatura do PM Requerente
+        <strong>{{posto_req}} PM {{nome_req}}</strong><br>
+        Requerente
     </div>
     
     <div class="sig-box">
-        <img src="assinaturas/{{assinatura_sub_file}}" alt="Assinatura Substituto" class="assinatura-imagem">
+        <img src="{{assinatura_sub_file}}" alt="Assinatura Substituto" class="assinatura-imagem">
         
         <div class="sig-line"></div>
-        Assinatura do PM Substituto
+        <strong>{{posto_sub}} PM {{nome_sub}}</strong><br>
+        Substituto
     </div>
     
 </div>
