@@ -9,8 +9,9 @@ app = Flask(__name__)
 app.secret_key = "uma_chave_secreta_aleatoria_1234"
 
 usuarios = {
-    "carlos": generate_password_hash("1234"),
-    "joana": generate_password_hash("abcd")
+    "cazevedo": generate_password_hash("31736"),
+    "joana": generate_password_hash("abcd"),
+    "edna": generate_password_hash("ednagrc")
 }
 
 def login_required(f):
